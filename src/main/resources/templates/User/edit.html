@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--<html>-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/Css/style.css" />
+    <script type="text/javascript" src="/Js/jquery.js"></script>
+    <script type="text/javascript" src="/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Js/ckform.js"></script>
+    <script type="text/javascript" src="/Js/common.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+
+ 
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="/userAdd"   th:object="${users}" method="post" class="definewidth m20">
+<input type="hidden" name="id" th:value="*{id}" />
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">身份证号码</td>
+            <td><input type="text" name="username"  th:value="*{username}" readonly/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">银行卡号</td>
+            <td><input type="text" name="usernum"  th:value="*{usernum}" readonly/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">密码</td>
+            <td><input type="password" name="password" /></td>
+        </tr>
+        <tr>
+            <td class="tableleft">真实姓名</td>
+            <td><input type="text" name="realname" th:value="*{realname}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">预留电话</td>
+            <td><input type="text" name="email" th:value="*{email}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">状态</td>
+            <td>
+                <input type="radio" name="status" value="1"  th:field="*{status}"/>启用
+<!--                    <eq name="user.status"  ></eq> -->
+               <input type="radio" name="status" value="0"  th:field="*{status}"/>禁用
+<!--                    <eq name="user.status" ></eq>-->
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">角色</td>
+            <td>
+            <div class="two fields">
+                <div class="required field">
+                    <div class="ui left labeled action input">
+                        <div class="ui fluid selection dropdown">
+<!--                            <input type="hidden" name="role.id" >-->
+                            <input type="hidden" name="role.id" th:value="*{role.id}">
+                            <i class="dropdown icon" ></i>
+                            <div class="default text" style="width: 180px">选择身份</div>
+                            <div class="menu"  >
+                                <div th:each="role : ${roles}"  class="item" data-value="1" th:data-value="${role.id}" th:text="${role.rolename}">错误日志
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">保存</button>				 &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+            self.location.href="/userMange";
+		 });
+
+    });
+
+
+    //初始化Markdown编辑器
+    var contentEditor;
+    $(function() {
+        contentEditor = editormd("md-content", {
+            width   : "100%",
+            height  : 640,
+            syncScrolling : "single",
+//        path    : "../static/lib/editormd/lib/"
+            path    : "/lib/editormd/lib/"
+        });
+    });
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+    $('#save-btn').click(function () {
+        $('[name="published"]').val(false);
+        $('#news-form').submit();
+    });
+
+
+    $('#publish-btn').click(function () {
+        $('[name="published"]').val(true);
+        $('#news-form').submit();
+    });
+
+
+
+    $('.ui.form').form({
+        fields : {
+            roleID : {
+                identifier: 'role.id',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入新闻分类'
+                }]
+            },
+        }
+    });
+
+
+
+
+
+</script>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/Css/style.css" />
+    <script type="text/javascript" src="/Js/jquery.js"></script>
+    <script type="text/javascript" src="/Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Js/ckform.js"></script>
+    <script type="text/javascript" src="/Js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="/roleAdd"  th:object="${role}"  method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">角色名称</td>
+            <td><input type="text" name="rolename" property="请勿重名"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">状态</td>
+            <td>
+                <input type="radio" name="status" value="1" checked/> 启用
+                <input type="radio" name="status" value="0"/> 禁用
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">权限</td>
+            <td>
+                <ul>
+                    <li>
+                        <label class='checkbox inline'>
+                            <input type='checkbox' name='userAdmin' value='1' />贷款额度
+                        </label>
+                        <ul>
+                            <li>
+                                <label class='checkbox inline'>
+                                    <input type='checkbox' name='userAdmin_list' value='1' />5 W 及以下
+                                </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='userAdmin_add' value='1' />5 W -- 20 W
+                            </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='userAdmin_edit' value='1' />20 W -- 300 W
+                            </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='userAdmin_delete' value='1' />300 W 及以上
+                            </label>
+                        </ul>
+                    </li>
+                    <li>
+                        <label class='checkbox inline'>
+                            <input type='checkbox' name='menuAdmin' value='1' />免息期限
+                        </label>
+                        <ul>
+                            <li>
+                                <label class='checkbox inline'>
+                                    <input type='checkbox' name='menuAdmin_list' value='1' /> 三月以内
+                                </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='menuAdmin_add' value='1' />三月至五月
+                            </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='menuAdmin_edit' value='1' />五月至一年
+                            </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='menuAdmin_delete' value='1' />免息
+                            </label>
+                        </ul>
+                    </li>
+                    <li>
+                        <label class='checkbox inline'>
+                            <input type='checkbox' name='roleAdmin' value='1' />信用状态
+                        </label>
+                        <ul>
+                            <li>
+                                <label class='checkbox inline'>
+                                    <input type='checkbox' name='roleAdmin_list' value='1' />无违规
+                                </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='roleAdmin_add' value='1' />一到三次违规
+                            </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='roleAdmin_edit' value='1' />三到五次违规
+                            </label>
+                            <li>
+                            <label class='checkbox inline'>
+                                <input type='checkbox' name='roleAdmin_delete' value='1' />失信
+                            </label>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" >保存</button>
+                &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $(':checkbox[name="userAdmin"]').click(function () {
+            $(':checkbox', $(this).closest('li')).prop('checked', this.checked);
+        });
+        $(':checkbox[name="menuAdmin"]').click(function () {
+            $(':checkbox', $(this).closest('li')).prop('checked', this.checked);
+        });
+        $(':checkbox[name="roleAdmin"]').click(function () {
+            $(':checkbox', $(this).closest('li')).prop('checked', this.checked);
+        });
+
+        $('#backid').click(function(){
+            window.location.href="/roleManage";
+        });
+    });
+
+</script>
