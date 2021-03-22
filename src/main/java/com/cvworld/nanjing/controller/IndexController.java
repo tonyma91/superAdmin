@@ -10,6 +10,7 @@ import com.cvworld.nanjing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,6 +96,7 @@ public  String exict(@RequestParam("username") String username,
     user.setTime(new Date());
     userService.saveuser(user);
     model.addAttribute("user",user);
+
     return "index";
 }
 
@@ -137,5 +139,12 @@ public  String nodeManage(@PageableDefault(size = 4,sort = {"id"},direction = So
     public  String menuManage(Model model){
         model.addAttribute("menu", menuService.listMenu());
         return "Menu/index";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/{id}")
+    public User findUser(@PathVariable Long id){
+           User user = userService.findUser(id);
+          return user;
     }
 }

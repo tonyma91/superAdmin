@@ -22,9 +22,9 @@ public class SuperAdminMseeageUtil {
    }
   }
   //权限变化
-  if (!oldUser.getRole().equales(newUser.getRole())){
-   stringBuilder.append("您的系统权限已经变更为：＂"+newUser.getRole().getRolename()+" ＂。");
-  }
+//  if (!oldUser.getRole().equales(newUser.getRole())){
+//   stringBuilder.append("您的系统权限已经变更为：＂"+newUser.getRole().getRolename()+" ＂。");
+//  }
   return stringBuilder.toString();
  }
 }

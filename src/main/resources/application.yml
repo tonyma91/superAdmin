@@ -1,4 +1,9 @@
 spring:
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/abc?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
@@ -20,5 +25,6 @@ spring:
     static-locations: classpath:/static/
 server:
   port: 8080
+
 
 

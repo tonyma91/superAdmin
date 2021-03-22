@@ -10,7 +10,7 @@ public interface UserService {
 
     User findUser(String name, String password);
 
-    void saveuser(User user);
+    User saveuser(User user);
 
     User findUser(Long id);
 

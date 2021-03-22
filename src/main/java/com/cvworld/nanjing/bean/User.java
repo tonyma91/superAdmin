@@ -4,12 +4,14 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
+
 
 
 @Entity
 @Table(name="t_user")
-public class User {
+public class User implements Serializable {
     @Id  //主键标识
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -115,5 +117,22 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", usernum='" + usernum + '\'' +
+                ", username='" + username + '\'' +
+                ", sex=" + sex +
+                ", brithday=" + brithday +
+                ", realname='" + realname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", time=" + time +
+//                ", role=" + role +
+                '}';
     }
 }
